@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+// A panel for holding the MenuContainer and MainContent
+
 public class MainContainer extends javax.swing.JPanel {
 
     public MainContainer() {

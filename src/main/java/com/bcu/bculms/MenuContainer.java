@@ -3,6 +3,9 @@ package com.bcu.bculms;
 import java.awt.Color;
 import javax.swing.JLabel;
 
+// The container for the left side of theapplication.
+// This houses the navigation bar and application title
+
 public class MenuContainer extends javax.swing.JPanel {
 
     private MainContent mC;
@@ -19,6 +22,7 @@ public class MenuContainer extends javax.swing.JPanel {
         blank.setOpaque(false);
         btnSet1.setOpaque(false);
         btnSet2.setOpaque(false);
+        // Initialize the Panel components containing the Navigation and app title
     }
 
     @SuppressWarnings("unchecked")
@@ -148,12 +152,15 @@ public class MenuContainer extends javax.swing.JPanel {
         activeLb.setBackground(new Color(122, 31, 31));
         activeLb.setForeground(new Color(255, 255,0));
         activeLb.repaint();
+        // A function for interactive navigation/ It highlights the selected component on the navigation bar.
     }
     
     
     public void setMainContent(MainContent content){
         this.mC = content;
     }
+    
+    // Calling the functions for the navigation bar
     
     private void homeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMousePressed
         selectedButton(home);

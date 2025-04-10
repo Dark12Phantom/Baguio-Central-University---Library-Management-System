@@ -1,5 +1,7 @@
 package com.bcu.bculms;
 
+// Student Information tab
+
 public class StudentInformation extends javax.swing.JPanel {
 
     public StudentInformation() {
@@ -32,6 +34,7 @@ public class StudentInformation extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //Will add a connection to the school's database for accessing student information as well as which books they borrowed/returned.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

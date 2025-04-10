@@ -1,5 +1,7 @@
 package com.bcu.bculms;
 
+// Dashboard tab
+
 public class Dashboard extends javax.swing.JPanel {
 
     public Dashboard() {
@@ -31,6 +33,8 @@ public class Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // Will add summaries for book borrow/return and book total.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

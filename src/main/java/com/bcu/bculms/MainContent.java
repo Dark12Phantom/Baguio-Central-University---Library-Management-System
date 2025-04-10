@@ -3,6 +3,8 @@ package com.bcu.bculms;
 
 import java.awt.CardLayout;
 
+// The panel which contains the Home, Dashboard, Bookshelf, and Student Information tabs
+
 public class MainContent extends javax.swing.JPanel {
 
     public MainContent() {
