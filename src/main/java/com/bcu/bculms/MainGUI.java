@@ -1,5 +1,7 @@
 package com.bcu.bculms;
 
+import java.sql.Connection;
+
 public class MainGUI extends javax.swing.JFrame {
 
 /*  Author
@@ -39,6 +41,9 @@ public class MainGUI extends javax.swing.JFrame {
                 new MainGUI().setVisible(true);
             }
         });
+        
+        Connection conn = DatabaseConnection.connect();
+        DatabaseConnection.closeConnection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
