@@ -27,6 +27,10 @@ public class MainContent extends javax.swing.JPanel {
         setLayout(new java.awt.CardLayout());
         add(home1, "home");
         add(dashboard1, "dashboard");
+
+        bookshelf1.setBackground(new java.awt.Color(102, 102, 102));
+        bookshelf1.setForeground(new java.awt.Color(255, 255, 255));
+        bookshelf1.setOpaque(false);
         add(bookshelf1, "bookshelf");
         add(studentInformation1, "student");
     }// </editor-fold>//GEN-END:initComponents

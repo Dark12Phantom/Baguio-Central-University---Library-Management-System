@@ -1,7 +1,7 @@
 package com.bcu.bculms;
 
 public class Book {
-    private int bookID;
+    private String bookID;
     private String title;
     private String author;
     private String publicationDate;
@@ -9,7 +9,7 @@ public class Book {
     private String borrowStatus;
     private String dateBorrowed;
     
-    public Book(int bookID, String title, String author, String publicationDate, String department, String borrowStatus, String dateBorrowed){
+    public Book(String bookID, String title, String author, String publicationDate, String department, String borrowStatus, String dateBorrowed){
         this.bookID = bookID;
         this.title = title;
         this.author = author;
@@ -19,7 +19,7 @@ public class Book {
         this.dateBorrowed = dateBorrowed;
     }
 
-    public int getBookID() {
+    public String getBookID() {
         return bookID;
     }
 
@@ -47,7 +47,7 @@ public class Book {
         return dateBorrowed;
     }
 
-    public void setBookID(int bookID) {
+    public void setBookID(String bookID) {
         this.bookID = bookID;
     }
 
