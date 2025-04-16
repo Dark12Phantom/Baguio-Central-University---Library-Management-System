@@ -34,12 +34,12 @@ public class DatabaseHelper {
     }
 
     public boolean addBook(String title, String author, String pubDate, String dept) {
-        String borrowID = getNextBorrowID(dept);
+        String bookID = getNextBookID(dept);
         String query = "INSERT INTO Books (bookID, title, author, publication_date, department, borrow_status, date_borrowed) "
                 + "VALUES (?, ?, ?, ?, ?, 'In Library', NULL)";
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(query)) {
 
-            pst.setString(1, borrowID);
+            pst.setString(1, bookID);
             pst.setString(2, title);
             pst.setString(3, author);
             pst.setString(4, pubDate);
@@ -54,8 +54,22 @@ public class DatabaseHelper {
         }
         return false;
     }
+    
+    public boolean removeBook(String bookID){
+        String query = "DELETE FROM Books WHERE bookID = ?";
+        
+        try(Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(query)){
+            pst.setString(1, bookID);
+            int rowsAffected = pst.executeUpdate();
+            return rowsAffected > 0;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
 
-    public String getNextBorrowID(String dept) {
+    public String getNextBookID(String dept) {
         // Format the prefix based on the department (e.g., "CBA", "CTELA")
         String prefix = dept;
         String query = "SELECT MAX(bookID) FROM Books WHERE department = ?";

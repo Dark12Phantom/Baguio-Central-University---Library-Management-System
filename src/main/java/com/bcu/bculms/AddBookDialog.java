@@ -2,7 +2,8 @@ package com.bcu.bculms;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class AddBookDialog extends JDialog {
     private JTextField titleField;
@@ -11,61 +12,123 @@ public class AddBookDialog extends JDialog {
     private JComboBox<String> deptBox;
     private JButton addButton;
     private JButton cancelButton;
-    DatabaseHelper dbHelper;
-
+    
     public AddBookDialog(JFrame parent) {
         super(parent, "Add Book", true);
+        initializeUI(parent);
+        setupEventHandlers();
+    }
+
+    private void initializeUI(JFrame parent) {
+        
+        getContentPane().setBackground(new Color(153,153,0));
+        
         setLayout(new GridLayout(6, 2, 10, 10));
         setSize(400, 300);
         setLocationRelativeTo(parent);
-        dbHelper = new DatabaseHelper();
-
-        // Fields
-        titleField = new JTextField();
-        authorField = new JTextField();
-        pubDateField = new JTextField();
-        deptBox = new JComboBox<>(new String[] {
+        
+        // Initialize components
+        titleField = createStyledTextField();
+        authorField = createStyledTextField();
+        pubDateField = createStyledTextField();
+        
+        deptBox = new JComboBox<>(new String[]{
             "CBA", "CTELA", "CHTM", "CoE", "CCJE", "CNSM", "SHS", "JHS", "ES"
         });
+        styleComboBox(deptBox);
+        
+        addButton = createStyledButton("Add");
+        cancelButton = createStyledButton("Cancel");
+        
+        JLabel title = new JLabel("Title:");
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        JLabel author = new JLabel("Author:");
+        author.setForeground(Color.WHITE);
+        author.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        JLabel pubDate = new JLabel("Publication Date:");
+        pubDate.setForeground(Color.WHITE);
+        pubDate.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        JLabel dept = new JLabel("Department:");
+        dept.setForeground(Color.WHITE);
+        dept.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
-        addButton = new JButton("Add");
-        cancelButton = new JButton("Cancel");
-
-        add(new JLabel("Title:"));
+        // Add components to dialog
+        add(title);
         add(titleField);
-        add(new JLabel("Author:"));
+        add(author);
         add(authorField);
-        add(new JLabel("Publication Date:"));
+        add(pubDate);
         add(pubDateField);
-        add(new JLabel("Department:"));
+        add(dept);
         add(deptBox);
         add(addButton);
         add(cancelButton);
+    }
 
-        // Button actions
-        addButton.addActionListener(e -> {
-            String title = titleField.getText();
-            String author = authorField.getText();
-            String pubDate = pubDateField.getText();
-            String dept = (String) deptBox.getSelectedItem();
+    private JTextField createStyledTextField() {
+        JTextField field = new JTextField();
+        field.setBackground(new Color(133, 7, 7));
+        field.setForeground(Color.WHITE);
+        field.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        field.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        return field;
+    }
 
-            if (title.isEmpty() || author.isEmpty() || pubDate.isEmpty() || dept.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields must be filled!", "Input Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Call the DatabaseHelper method to add the book to the database
-            boolean success = dbHelper.addBook(title, author, pubDate, dept);
-
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Book added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                dispose();  // Close the dialog
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to add the book. Please try again.", "Database Error", JOptionPane.ERROR_MESSAGE);
+    private void styleComboBox(JComboBox<String> comboBox) {
+        comboBox.setBackground(new Color(133, 7, 7));
+        comboBox.setForeground(Color.WHITE);
+        comboBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        comboBox.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                setBackground(new Color(133, 7, 7));
+                setForeground(Color.WHITE);
+                return this;
             }
         });
+    }
 
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setBackground(new Color(133, 7, 7));
+        button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
+        button.setFocusPainted(false);
+        return button;
+    }
+
+    private void setupEventHandlers() {
+        addButton.addActionListener(this::handleAddBook);
         cancelButton.addActionListener(e -> dispose());
     }
-    
+
+    private void handleAddBook(ActionEvent e) {
+        String title = titleField.getText().trim();
+        String author = authorField.getText().trim();
+        String pubDate = pubDateField.getText().trim();
+        String dept = (String) deptBox.getSelectedItem();
+
+        if (title.isEmpty() || author.isEmpty() || pubDate.isEmpty()) {
+            showError("All fields must be filled!");
+            return;
+        }
+
+        boolean success = new DatabaseHelper().addBook(title, author, pubDate, dept);
+        if (success) {
+            showSuccess("Book added successfully!");
+            dispose();
+        } else {
+            showError("Failed to add the book. Please try again.");
+        }
+    }
+
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void showSuccess(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

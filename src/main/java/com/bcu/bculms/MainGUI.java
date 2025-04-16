@@ -1,21 +1,19 @@
 package com.bcu.bculms;
 
-import java.sql.Connection;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainGUI extends javax.swing.JFrame {
 
-/*  Author
+    /*  Author
             Erick C. Gaceta
             Derrik Dwain V. Cabanilla
     For the System Analysis and Design Subject.
     
-*/
-    
-    
+     */
     // The entry point for the application
-    
     public MainGUI() {
-        initComponents(); //Initialize the components needed to run the software
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,18 +30,13 @@ public class MainGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //Execution
-    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGUI().setVisible(true);
             }
         });
-        
-        Connection conn = DatabaseConnection.getConnection();
-        DatabaseConnection.closeConnection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,17 +1,30 @@
 package com.bcu.bculms;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String DATABASE_URL = "jdbc:sqlite:src/main/resources/com/bcu/database/library.db";
+    private static final String DATABASE_URL = "jdbc:sqlite:library.db";
     private static Connection conn = null;
 
     public static Connection getConnection() {
         if (conn == null || isClosed()) {
+
             try {
+                System.out.println("Working Directory: " + System.getProperty("user.dir"));
+
+                File dbFile = new File("library.db");
+                System.out.println("Looking for DB at: " + dbFile.getAbsolutePath());
+                System.out.println("Database file exists? " + dbFile.exists());
+
+                if (!dbFile.exists()) {
+                    System.err.println("Database file NOT FOUND!");
+                    return null;
+                }
+
                 conn = DriverManager.getConnection(DATABASE_URL);
                 System.out.println("Database Connection established.");
             } catch (SQLException e) {
