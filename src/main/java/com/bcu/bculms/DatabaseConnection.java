@@ -8,7 +8,7 @@ public class DatabaseConnection {
     private static final String DATABASE_URL = "jdbc:sqlite:src/main/resources/com/bcu/database/library.db";
     private static Connection conn = null;
     
-    public static Connection connect(){
+    public static Connection getConnection(){
         if(conn == null){
             try{
                 conn = DriverManager.getConnection(DATABASE_URL);
@@ -24,6 +24,7 @@ public class DatabaseConnection {
         if(conn != null){
             try {
                 conn.close();
+                System.out.println("Database Closed.");
             }catch (SQLException e){
                 System.out.println("Error: " + e.getMessage());
             }

@@ -42,7 +42,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
         
-        Connection conn = DatabaseConnection.connect();
+        Connection conn = DatabaseConnection.getConnection();
         DatabaseConnection.closeConnection();
     }
 
