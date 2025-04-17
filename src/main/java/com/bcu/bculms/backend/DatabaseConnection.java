@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.backend;
 
 import java.io.File;
 import java.sql.Connection;

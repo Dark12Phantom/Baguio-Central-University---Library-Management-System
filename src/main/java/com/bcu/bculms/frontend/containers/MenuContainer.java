@@ -1,5 +1,6 @@
-package com.bcu.bculms;
+package com.bcu.bculms.frontend.containers;
 
+import com.bcu.bculms.frontend.containers.MainContent;
 import java.awt.Color;
 import javax.swing.JLabel;
 

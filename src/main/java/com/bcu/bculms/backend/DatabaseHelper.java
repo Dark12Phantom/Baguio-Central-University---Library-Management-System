@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.backend;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public class DatabaseHelper {
                         rs.getString("publication_date"),
                         rs.getString("department"),
                         rs.getString("borrow_status"),
-                        rs.getString("date_borrowed")
+                        rs.getInt("book_copies")
                 );
                 books.add(book);
             }
@@ -33,10 +33,10 @@ public class DatabaseHelper {
         return books;
     }
 
-    public boolean addBook(String title, String author, String pubDate, String dept) {
+    public boolean addBook(String title, String author, String pubDate, String dept, int bookCopies) {
         String bookID = getNextBookID(dept);
-        String query = "INSERT INTO Books (bookID, title, author, publication_date, department, borrow_status, date_borrowed) "
-                + "VALUES (?, ?, ?, ?, ?, 'In Library', NULL)";
+        String query = "INSERT INTO Books (bookID, title, author, publication_date, department, borrow_status, book_copies) "
+                + "VALUES (?, ?, ?, ?, ?, 'In Library', ?)";
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(query)) {
 
             pst.setString(1, bookID);
@@ -44,6 +44,7 @@ public class DatabaseHelper {
             pst.setString(3, author);
             pst.setString(4, pubDate);
             pst.setString(5, dept);
+            pst.setInt(6, bookCopies);
 
             int rowsAffected = pst.executeUpdate();
 

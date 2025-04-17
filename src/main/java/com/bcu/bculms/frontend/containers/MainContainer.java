@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.frontend.containers;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -20,8 +20,8 @@ public class MainContainer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainContent1 = new com.bcu.bculms.MainContent();
-        menuContainer2 = new com.bcu.bculms.MenuContainer();
+        mainContent1 = new com.bcu.bculms.frontend.containers.MainContent();
+        menuContainer2 = new com.bcu.bculms.frontend.containers.MenuContainer();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,7 +55,7 @@ public class MainContainer extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.bcu.bculms.MainContent mainContent1;
-    private com.bcu.bculms.MenuContainer menuContainer2;
+    private com.bcu.bculms.frontend.containers.MainContent mainContent1;
+    private com.bcu.bculms.frontend.containers.MenuContainer menuContainer2;
     // End of variables declaration//GEN-END:variables
 }

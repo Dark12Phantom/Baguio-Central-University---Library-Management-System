@@ -1,26 +1,27 @@
-package com.bcu.bculms;
+package com.bcu.bculms.frontend.panels;
 
-// Dashboard tab
+// Student Information tab
 
-public class Dashboard extends javax.swing.JPanel {
+public class StudentInformation extends javax.swing.JPanel {
 
-    public Dashboard() {
+    public StudentInformation() {
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setText("DASHBOARD");
+        jLabel1.setText("STUDENT INFORMATION");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(446, Short.MAX_VALUE)
+                .addContainerGap(381, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(464, 464, 464))
         );
@@ -33,8 +34,7 @@ public class Dashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    // Will add summaries for book borrow/return and book total.
+    //Will add a connection to the school's database for accessing student information as well as which books they borrowed/returned.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

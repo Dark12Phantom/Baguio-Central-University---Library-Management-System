@@ -37,9 +37,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.bcu.bculms.MainContent" name="mainContent1">
+    <Component class="com.bcu.bculms.frontend.containers.MainContent" name="mainContent1">
     </Component>
-    <Component class="com.bcu.bculms.MenuContainer" name="menuContainer2">
+    <Component class="com.bcu.bculms.frontend.containers.MenuContainer" name="menuContainer2">
     </Component>
   </SubComponents>
 </Form>

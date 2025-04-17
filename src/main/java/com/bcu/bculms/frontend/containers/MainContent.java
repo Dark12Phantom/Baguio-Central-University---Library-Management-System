@@ -1,5 +1,5 @@
 
-package com.bcu.bculms;
+package com.bcu.bculms.frontend.containers;
 
 import java.awt.CardLayout;
 
@@ -18,10 +18,10 @@ public class MainContent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        home1 = new com.bcu.bculms.Home();
-        dashboard1 = new com.bcu.bculms.Dashboard();
-        bookshelf1 = new com.bcu.bculms.Bookshelf();
-        studentInformation1 = new com.bcu.bculms.StudentInformation();
+        home1 = new com.bcu.bculms.frontend.panels.Home();
+        dashboard1 = new com.bcu.bculms.frontend.panels.Dashboard();
+        bookshelf1 = new com.bcu.bculms.frontend.panels.Bookshelf();
+        studentInformation1 = new com.bcu.bculms.frontend.panels.StudentInformation();
 
         setOpaque(false);
         setLayout(new java.awt.CardLayout());
@@ -56,9 +56,9 @@ public class MainContent extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.bcu.bculms.Bookshelf bookshelf1;
-    private com.bcu.bculms.Dashboard dashboard1;
-    private com.bcu.bculms.Home home1;
-    private com.bcu.bculms.StudentInformation studentInformation1;
+    private com.bcu.bculms.frontend.panels.Bookshelf bookshelf1;
+    private com.bcu.bculms.frontend.panels.Dashboard dashboard1;
+    private com.bcu.bculms.frontend.panels.Home home1;
+    private com.bcu.bculms.frontend.panels.StudentInformation studentInformation1;
     // End of variables declaration//GEN-END:variables
 }

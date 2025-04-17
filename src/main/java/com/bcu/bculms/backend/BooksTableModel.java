@@ -1,11 +1,11 @@
-package com.bcu.bculms;
+package com.bcu.bculms.backend;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class BooksTableModel extends AbstractTableModel {
 
-    private final String[] columnNames = {"Book ID", "Title", "Author", "Publication Date", "Department", "Borrow Status", "Date Borrowed"};
+    private final String[] columnNames = {"Book ID", "Title", "Author", "Publication Date", "Department", "Borrow Status", "Date Borrowed", "Book Copies"};
     private List<Book> books;
 
     public BooksTableModel(List<Book> books) {
@@ -44,7 +44,7 @@ public class BooksTableModel extends AbstractTableModel {
             case 5:
                 return book.getBorrowStatus();
             case 6:
-                return book.getDateBorrowed();
+                return book.getBookCopies();
             default:
                 return null;
         }

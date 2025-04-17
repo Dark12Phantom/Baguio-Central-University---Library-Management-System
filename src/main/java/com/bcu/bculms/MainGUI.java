@@ -1,5 +1,7 @@
 package com.bcu.bculms;
 
+
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,7 +22,7 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainContainer1 = new com.bcu.bculms.MainContainer();
+        mainContainer1 = new com.bcu.bculms.frontend.containers.MainContainer();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -40,6 +42,6 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.bcu.bculms.MainContainer mainContainer1;
+    private com.bcu.bculms.frontend.containers.MainContainer mainContainer1;
     // End of variables declaration//GEN-END:variables
 }

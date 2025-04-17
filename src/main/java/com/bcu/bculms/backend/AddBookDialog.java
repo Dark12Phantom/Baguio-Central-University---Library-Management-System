@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.backend;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +10,7 @@ public class AddBookDialog extends JDialog {
     private JTextField authorField;
     private JTextField pubDateField;
     private JComboBox<String> deptBox;
+    private JTextField bookCopiesField;
     private JButton addButton;
     private JButton cancelButton;
     
@@ -23,8 +24,8 @@ public class AddBookDialog extends JDialog {
         
         getContentPane().setBackground(new Color(153,153,0));
         
-        setLayout(new GridLayout(6, 2, 10, 10));
-        setSize(400, 300);
+        setLayout(new GridLayout(7, 2, 10, 10));
+        setSize(400, 400);
         setLocationRelativeTo(parent);
         
         // Initialize components
@@ -36,7 +37,7 @@ public class AddBookDialog extends JDialog {
             "CBA", "CTELA", "CHTM", "CoE", "CCJE", "CNSM", "SHS", "JHS", "ES"
         });
         styleComboBox(deptBox);
-        
+        bookCopiesField = createStyledTextField();
         addButton = createStyledButton("Add");
         cancelButton = createStyledButton("Cancel");
         
@@ -52,6 +53,9 @@ public class AddBookDialog extends JDialog {
         JLabel dept = new JLabel("Department:");
         dept.setForeground(Color.WHITE);
         dept.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        JLabel bookCopies = new JLabel("Book Copies");
+        bookCopies.setForeground(Color.WHITE);
+        bookCopies.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 
         // Add components to dialog
         add(title);
@@ -62,6 +66,8 @@ public class AddBookDialog extends JDialog {
         add(pubDateField);
         add(dept);
         add(deptBox);
+        add(bookCopies);
+        add(bookCopiesField);
         add(addButton);
         add(cancelButton);
     }
@@ -109,13 +115,25 @@ public class AddBookDialog extends JDialog {
         String author = authorField.getText().trim();
         String pubDate = pubDateField.getText().trim();
         String dept = (String) deptBox.getSelectedItem();
+        int bookCopies;
 
         if (title.isEmpty() || author.isEmpty() || pubDate.isEmpty()) {
             showError("All fields must be filled!");
             return;
         }
+        
+        try{
+            bookCopies = Integer.parseInt(bookCopiesField.getText().trim());
+            if(bookCopies <= 0){
+                showError("Number of Copies must be a positive integer/ must not be zero");
+                return;
+            }
+        }catch(NumberFormatException ex){
+            showError("Invalid number format for copies");
+            return;
+        }
 
-        boolean success = new DatabaseHelper().addBook(title, author, pubDate, dept);
+        boolean success = new DatabaseHelper().addBook(title, author, pubDate, dept, bookCopies);
         if (success) {
             showSuccess("Book added successfully!");
             dispose();

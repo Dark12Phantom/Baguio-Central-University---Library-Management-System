@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.backend;
 
 public class Book {
     private String bookID;
@@ -7,16 +7,16 @@ public class Book {
     private String publicationDate;
     private String department;
     private String borrowStatus;
-    private String dateBorrowed;
+    private int bookCopies;
     
-    public Book(String bookID, String title, String author, String publicationDate, String department, String borrowStatus, String dateBorrowed){
+    public Book(String bookID, String title, String author, String publicationDate, String department, String borrowStatus, int bookCopies){
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.publicationDate = publicationDate;
         this.department = department;
         this.borrowStatus = borrowStatus;
-        this.dateBorrowed = dateBorrowed;
+        this.bookCopies = bookCopies;
     }
 
     public String getBookID() {
@@ -43,8 +43,8 @@ public class Book {
         return borrowStatus;
     }
 
-    public String getDateBorrowed() {
-        return dateBorrowed;
+    public int getBookCopies() {
+        return bookCopies;
     }
 
     public void setBookID(String bookID) {
@@ -71,7 +71,7 @@ public class Book {
         this.borrowStatus = borrowStatus;
     }
 
-    public void setDateBorrowed(String dateBorrowed) {
-        this.dateBorrowed = dateBorrowed;
+    public void setBookCopies(int bookCopies) {
+        this.bookCopies = bookCopies;
     }
 }

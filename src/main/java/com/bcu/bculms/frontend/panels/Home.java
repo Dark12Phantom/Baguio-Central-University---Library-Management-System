@@ -1,4 +1,4 @@
-package com.bcu.bculms;
+package com.bcu.bculms.frontend.panels;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
