@@ -4,31 +4,31 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DatabaseConnection {
-
+    private static final Logger LOGGER = Logger.getLogger(DatabaseConnection.class.getName());
     private static final String DATABASE_URL = "jdbc:sqlite:library.db";
     private static Connection conn = null;
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws SQLException {
         if (conn == null || isClosed()) {
+            File dbFile = new File("library.db");
+            LOGGER.info("Looking for DB at: " + dbFile.getAbsolutePath());
+
+            if (!dbFile.exists()) {
+                LOGGER.severe("Database file not found at: " + dbFile.getAbsolutePath());
+                throw new SQLException("Database file not found");
+            }
 
             try {
-                System.out.println("Working Directory: " + System.getProperty("user.dir"));
-
-                File dbFile = new File("library.db");
-                System.out.println("Looking for DB at: " + dbFile.getAbsolutePath());
-                System.out.println("Database file exists? " + dbFile.exists());
-
-                if (!dbFile.exists()) {
-                    System.err.println("Database file NOT FOUND!");
-                    return null;
-                }
-
+                Class.forName("org.sqlite.JDBC");
                 conn = DriverManager.getConnection(DATABASE_URL);
-                System.out.println("Database Connection established.");
-            } catch (SQLException e) {
-                System.err.println("Error: " + e.getMessage());
+                LOGGER.info("Database connection established");
+            } catch (ClassNotFoundException e) {
+                LOGGER.severe("SQLite JDBC Driver not found: " + e.getMessage());
+                throw new SQLException("SQLite JDBC Driver not found", e);
             }
         }
         return conn;
@@ -36,8 +36,9 @@ public class DatabaseConnection {
 
     private static boolean isClosed() {
         try {
-            return conn != null && conn.isClosed();
+            return conn == null || conn.isClosed();
         } catch (SQLException e) {
+            LOGGER.log(Level.WARNING, "Error checking connection state", e);
             return true;
         }
     }
@@ -47,10 +48,12 @@ public class DatabaseConnection {
             try {
                 if (!conn.isClosed()) {
                     conn.close();
-                    System.out.println("Database Closed.");
+                    LOGGER.info("Database connection closed");
                 }
             } catch (SQLException e) {
-                System.out.println("Error: " + e.getMessage());
+                LOGGER.log(Level.WARNING, "Error closing database connection", e);
+            } finally {
+                conn = null;
             }
         }
     }
