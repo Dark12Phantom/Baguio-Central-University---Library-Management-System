@@ -5,13 +5,10 @@ import com.bcu.bculms.backend.BookCopy;
 import com.bcu.bculms.backend.bookmanagement.BooksTableModel;
 import com.bcu.bculms.backend.bookmanagement.CopiesTableModel;
 import com.bcu.bculms.backend.DatabaseHelper;
-import com.bcu.bculms.backend.Loan;
-import com.bcu.bculms.backend.bookmanagement.LoansTableModel;
 import com.bcu.bculms.backend.bookmanagement.AddBookDialog;
 import com.bcu.bculms.backend.bookmanagement.BorrowBookDialog;
 import com.bcu.bculms.backend.bookmanagement.EditBookDialog;
 import com.bcu.bculms.backend.bookmanagement.RemoveBookDialog;
-import com.bcu.bculms.backend.bookmanagement.ReturnBookDialog;
 import java.awt.Frame;
 import java.util.List;
 import javax.swing.*;
@@ -20,13 +17,18 @@ public class Bookshelf extends JPanel {
     private DatabaseHelper dbHelper;
     private BooksTableModel booksTableModel;
     private CopiesTableModel copiesTableModel;
+    private Dashboard dashboard;
 
     public Bookshelf() {
         initComponents();
         initializeDatabase();
-        
+
         jTabbedPane2.addChangeListener(e -> {
         });
+    }
+
+    public void setDashboard(Dashboard dashboard) {
+        this.dashboard = dashboard;
     }
 
     private void refreshAllTables() {
@@ -34,6 +36,10 @@ public class Bookshelf extends JPanel {
         List<Book> books = dbHelper.getAllBooks();
         booksTableModel = new BooksTableModel(books);
         jTable1.setModel(booksTableModel);
+
+        if(dashboard != null){
+            dashboard.loadStatistics();
+        }
 
         // Add selection listener to Books table
         jTable1.getSelectionModel().addListSelectionListener(e -> {
@@ -55,10 +61,6 @@ public class Bookshelf extends JPanel {
         jTable2.setModel(copiesTableModel);
     }
 
-
-
-
-
     private boolean confirmDelete(String itemType, String identifier) {
         return JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to delete this " + itemType + ": " + identifier + "?",
@@ -66,10 +68,9 @@ public class Bookshelf extends JPanel {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
-
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -108,29 +109,29 @@ public class Bookshelf extends JPanel {
         jTable1.setFont(new java.awt.Font("Open Sans", 1, 16)); // NOI18N
         jTable1.setForeground(new java.awt.Color(153, 153, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Book ID", "Title", "Author", "Publication Date", "Department"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Book ID", "Title", "Author", "Publication Date", "Department"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                true, false, false, false, false
+            boolean[] canEdit = new boolean[] {
+                    true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable1.setOpaque(false);
@@ -160,29 +161,29 @@ public class Bookshelf extends JPanel {
         jTable2.setFont(new java.awt.Font("Open Sans", 1, 14)); // NOI18N
         jTable2.setForeground(new java.awt.Color(153, 153, 0));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Copy ID", "Book ID", "Titile", "Status", "Publication Date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                new Object[][] {
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Copy ID", "Book ID", "Titile", "Status", "Publication Date"
+                }) {
+            Class[] types = new Class[] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                    java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            boolean[] canEdit = new boolean[] {
+                    false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jTable2.setOpaque(false);
@@ -265,10 +266,10 @@ public class Bookshelf extends JPanel {
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {
         refreshAllTables();
     }
-    
+
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int selectedTab = jTabbedPane2.getSelectedIndex();
-        
+
         switch (selectedTab) {
             case 0: // Books tab
                 Frame parentFrame = (Frame) SwingUtilities.getWindowAncestor(this);
@@ -303,10 +304,10 @@ public class Bookshelf extends JPanel {
                         refreshAllTables();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, 
-                        "Please select a book to edit.", 
-                        "No Selection", 
-                        JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this,
+                            "Please select a book to edit.",
+                            "No Selection",
+                            JOptionPane.WARNING_MESSAGE);
                 }
                 break;
             case 1: // Copies tab
@@ -317,6 +318,7 @@ public class Bookshelf extends JPanel {
                 break;
         }
     }
+
     private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {
         int selectedTab = jTabbedPane2.getSelectedIndex();
         int selectedRow = -1;
@@ -332,10 +334,10 @@ public class Bookshelf extends JPanel {
                         refreshAllTables();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, 
-                        "Please select a book to remove.", 
-                        "No Selection", 
-                        JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this,
+                            "Please select a book to remove.",
+                            "No Selection",
+                            JOptionPane.WARNING_MESSAGE);
                 }
                 break;
             case 1: // Copies tab
@@ -360,15 +362,15 @@ public class Bookshelf extends JPanel {
                     }
                 } else {
                     JOptionPane.showMessageDialog(this,
-                        "This copy is not available for borrowing.",
-                        "Copy Unavailable",
-                        JOptionPane.WARNING_MESSAGE);
+                            "This copy is not available for borrowing.",
+                            "Copy Unavailable",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "Please select a book copy to borrow.",
-                    "No Selection",
-                    JOptionPane.WARNING_MESSAGE);
+                        "Please select a book copy to borrow.",
+                        "No Selection",
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -385,15 +387,15 @@ public class Bookshelf extends JPanel {
                     }
                 } else {
                     JOptionPane.showMessageDialog(this,
-                        "This copy is not currently borrowed.",
-                        "Return Not Needed",
-                        JOptionPane.WARNING_MESSAGE);
+                            "This copy is not currently borrowed.",
+                            "Return Not Needed",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "Please select a borrowed copy to return.",
-                    "No Selection",
-                    JOptionPane.WARNING_MESSAGE);
+                        "Please select a borrowed copy to return.",
+                        "No Selection",
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -420,4 +422,3 @@ public class Bookshelf extends JPanel {
     private javax.swing.JButton returnBtn;
     // End of variables declaration//GEN-END:variables
 }
-

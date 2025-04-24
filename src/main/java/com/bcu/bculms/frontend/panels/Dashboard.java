@@ -7,8 +7,7 @@ import com.bcu.bculms.backend.DatabaseHelper;
 
 public class Dashboard extends javax.swing.JPanel {
 
-    // Add these outside the generated code block
-    private void loadStatistics() {
+    public void loadStatistics() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         try {
             totalBooksValue.setText(String.valueOf(dbHelper.getBookCopies(null).size()));

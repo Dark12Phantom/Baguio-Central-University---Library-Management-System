@@ -1,6 +1,7 @@
 package com.bcu.bculms.backend;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -448,5 +449,20 @@ public class DatabaseHelper {
     
     private String generateCopyID() {
         return "CP" + System.currentTimeMillis();
+    }
+
+    public boolean updateCopyStatus(String copyId, String newStatus) {
+        String sql = "UPDATE BookCopies SET status = ? WHERE copyID = ?";
+        try (Connection conn = DatabaseConnection.getConnection();  // Use centralized connection
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, newStatus);
+            pstmt.setString(2, copyId);
+            return pstmt.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error updating copy status: " + e.getMessage(), e);
+            return false;
+        }
     }
 }
